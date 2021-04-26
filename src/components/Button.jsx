@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export const Button = (value) => {
-  
-  const [value, setValue] = useState(); 
 
+export const Button = (props) => {
   return (
-    <div>
-      <textarea value={value} onChange={(e)=> setValue(e.target.value)} />
-      <button onClick={() => console.log(value)}>
-        Enter
+      <button className={props.className} onClick={props.handleClick}>
+          {props.name}
       </button>
-    </div>
   );
 }

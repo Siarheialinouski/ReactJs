@@ -8,7 +8,7 @@ export const LoginPage = () => {
 
     return (
         <>
-            <div >
+            {/* <div >
                 Login page
                 <div>
                   <h6 >Email: </h6>
@@ -20,7 +20,7 @@ export const LoginPage = () => {
                 </div>
                 <button onClick={() => { }}> Submit </button>
                 <h6>  If you not have an account you can  <Link to='/register'>Registration</Link></h6>
-            </div>
+            </div> */}
         </>
     );
 }

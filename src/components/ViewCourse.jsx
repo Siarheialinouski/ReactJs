@@ -1,30 +1,25 @@
 import './Styles.css';
-import React, { useState } from "react";
+import React, { useMemo } from "react";
+import { Button } from './Button';
 
 export const ViewCourse = (props) => {
+    const mapper = useMemo(() => { return props.authorsList.reduce((acc, author) => { return { ...acc, [author.id]: author.name }; }, {}); }, [props.authorsList]);
 
-    const [authorsList, setList] = useState(props.authorsList);
-    const [title, setTitle] = useState(props.selectedCourse && props.selectedCourse.title);
-    const [description, setDescription] = useState(props.selectedCourse && props.selectedCourse.description);
-    const [duration, setDuration] = useState(props.selectedCourse && props.selectedCourse.duration);
-    const [autors, setAutors] = useState(props.selectedCourse && props.selectedCourse.authors);
-
-    const mapper = {};
-    authorsList.forEach(element => {
-      mapper[element.id] = element.name;
-    });
-
+    function handleClickFunction() {
+        props.toggleShowMode(false);
+    }
     return (
         <>
-        <p>Title: {title}</p>
-        <p>Description: {description}</p>
-        <p>Duration: {duration}</p>
-        <p>  Authors: {autors.map((id) =>
-            <div>
-            {mapper[id]}
-            </div>)}
-        </p>
-            <button className='inputSearch' onClick={() => { props.toggleShowMode(false); }}> Back to list </button>
+            <p>Title: {props.selectedCourse.title}</p>
+            <p>Description: {props.selectedCourse.description}</p>
+            <p>Duration: {props.selectedCourse.duration}</p>
+            <p>Time: {props.selectedCourse.creationDate}</p>
+            <p>  Authors: {props.selectedCourse.authors.map((id) =>
+                <div>
+                    {mapper[id]}
+                </div>)}
+            </p>
+            <Button className='inputSearch' handleClick={handleClickFunction} name={"Back to list"} />
         </>
     );
 }

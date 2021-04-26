@@ -1,29 +1,44 @@
 import React, { useState } from 'react';
-
+import { Button } from './Button';
+import { InputField } from './InputField';
 
 export const SearchCourse = (props) => {
 
     const [inputValue, setValue] = useState("");
-    const [courseList, setCourseList] = useState(props && props.courseList)
 
     const mapper = {};
-    courseList.forEach(element => {
-      mapper[element.title] = element;
+    props.courseList.forEach(element => {
+        mapper[element.title] = element;
     });
 
     const searchList = (searchValue) => {
-        setCourseList([mapper[searchValue]]);
-        {props.setSearchList(courseList)}
-      }
+        props.setCourseList([mapper[searchValue]]);
+        { props.setSearchList(props.courseList) }
+    }
+
+    function handleClickFunction() {
+        inputValue && searchList(inputValue)
+    }
+
+    const handleChange = (e) => {
+        setValue(e)
+    };
 
     return (
-        <div>
-            <input type="text" value={inputValue} onChange={(e) => setValue(e.target.value)} />
-            <div class="emptySpaceLittle"></div>
-            <button className='inputSearch' onClick={() => inputValue && searchList(inputValue)}>
-                Search
-            </button>           
+        <div class="Div-inline">
+            <div class="Div-inline">
+                <InputField
+                    type="text"
+                    value={inputValue && inputValue}
+                    label="Search"
+                    onChange={handleChange}
+                />
+            </div>
+
+            <div class="Div-inline">
+                <Button className='inputSearch' handleClick={handleClickFunction} name={"Search"} /></div>
             <div class="emptySpace"></div>
         </div>
+
     );
 }

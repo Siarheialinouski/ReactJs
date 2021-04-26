@@ -11,7 +11,7 @@ export const RegistrationPage = () => {
         <>
             <div >
                 Registration page
-                <div>
+                {/* <div>
                     <div class="Div-inline">{<h6 >Name</h6>}</div>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
@@ -23,7 +23,7 @@ export const RegistrationPage = () => {
                     <div class="Div-inline">{<h6 >Password</h6>}</div>
                     <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <button onClick={() => { }}> Submit </button>
+                <button onClick={() => { }}> Submit </button> */}
 
             </div>
         </>
