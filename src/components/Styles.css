@@ -1,0 +1,26 @@
+  .Div-inline {
+    display:inline-block;
+  }
+
+  .emptySpace{
+    display:inline-block;
+    width: 1000px;
+    height: 70px;
+  }
+
+  .emptySpaceLittle{
+    display:inline-block;
+    width: 30px;
+    height: 70px;
+  }
+
+  .Empty-space2{
+    display:inline-block;
+    width: 50px;
+  }
+
+  .App-header {
+    background-color: #4e5c72;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
