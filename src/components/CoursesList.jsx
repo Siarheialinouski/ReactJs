@@ -1,20 +1,34 @@
 import './Styles.css';
-import React, { useState ,useMemo} from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Card } from './Card';
+import { getAll as getAllAuthors } from "../app_backend_api/authorController";
+import { getAllCourses } from "../app_backend_api/courseController";
 
-export const CoursesList = (props) => {
+export const CoursesList = () => {
 
-    const mapper = useMemo(() => { return props.authorsList.reduce((acc, author) => { return { ...acc, [author.id]: author.name }; }, {}); }, [props.authorsList]);
+    const [courses, setCourses] = useState([]);
+    const [authors, setAuthors] = useState([]);
 
-    const coursesList = props.courseList.length > 0 ? (props.courseList.map((course) =>
-        <Card course={course} mapper={mapper} selectedCourse={props.selectedCourse}
-            toggleEditMode={props.toggleEditMode} toggleShowMode={props.toggleShowMode} authorsList={props.authorsList} />
-    )) : <p>No data. Feel free to add a new course</p>
+    useEffect(() => {
+        getAllCourses()
+            .then((resp) => {
+                setCourses(resp.data.result);
+            })
+            .catch((error) => console.log(error));
+
+        getAllAuthors()
+            .then((resp) => {
+                setAuthors(resp.data.result);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
     return (
         <>
             <div>
-                <div>{coursesList}</div>
+                {courses.length ? courses.map((course) => (
+                    <Card course={course} authors={authors} />
+                )) : <p>No data. Feel free to add a new course</p>}
             </div>
         </>
     );

@@ -5,7 +5,6 @@ import { InputField } from './InputField';
 
 
 export const AddAuthor = (props) => {
-
   const addToAuthorsList = (author) => {
     const newauthor =
     {
