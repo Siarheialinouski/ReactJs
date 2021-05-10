@@ -1,33 +1,32 @@
 import './Styles.css';
 import { Button } from './Button';
+import { useHistory } from 'react-router-dom'
 
-export const Card = (props) => {
+export const Card = ({ course, authors }) => {
 
-  function handleClickToggleEditMode() {
-    props.selectedCourse(props.course.id);
-    props.toggleEditMode(true);
-  }
+  const history = useHistory();
 
   function handleClickToggleShowMode() {
-    props.selectedCourse(props.course.id);
-     props.toggleShowMode(true);
+    history.push(`/courses/${course.id}`)
   }
 
   return (
     <>
       <div>
-        <p>  Tittle: {props.course.title}</p>
-        <p>  Description: {props.course.description}</p>
-        <p>  Duration: {props.course.duration}</p>
-        <p>  Created: {props.course.creationDate}</p>
-        <p>  Authors: {props.course.authors &&  props.course.authors.map((id) =>
-          <div>
-            {props.mapper[id]}
-             {console.log("props.authorsList", props.authorsList)}
-            {console.log("props.mapper", props.mapper)}
-          </div>)} </p>
+        <p>  Tittle: {course.title}</p>
+        <p>  Description: {course.description}</p>
+        <p>  Duration: {course.duration}</p>
+        <p>  Created: {course.creationDate}</p>
+        <p>  Authors: {course.authors.map((id) =>
+              authors.reduce((acc, author) => {
+                if (author.id === id) {
+                  return acc + ` [${author.name}]`;
+                }
+                return acc;
+              }, " ")
+        )}
+        </p>
         <p>  -------------------</p>
-        <Button className='inputSearch' handleClick={handleClickToggleEditMode} name={"Edit course"} />
         <Button className='inputSearch' handleClick={handleClickToggleShowMode} name={"View course"} />
       </div>
     </>
