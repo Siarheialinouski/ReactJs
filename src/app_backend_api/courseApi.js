@@ -14,3 +14,10 @@ export const addCourse = (course) => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+
+export const deleteCourse = (id) => {
+  const token = localStorage.getItem("Bearer");
+  return axios.delete(`http://localhost:3000/courses/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};

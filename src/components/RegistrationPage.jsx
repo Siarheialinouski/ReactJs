@@ -1,9 +1,9 @@
 import './Styles.css';
 import React, { useState } from "react";
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { InputField } from "./InputField"
 import { Button } from './Button';
-import { registration } from "../app_backend_api/authController";
+import { registration } from "../app_backend_api/authApi";
 
 export const RegistrationPage = () => {
     const history = useHistory();
