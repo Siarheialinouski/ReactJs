@@ -14,11 +14,7 @@ export const Card = ({ course, authors }) => {
     history.push(`/courses/${course.id}`)
   }
 
-  function handleClickDeleteCourse() {
-    dispatch(deleteCourse(course.id))
-  }
-
-  function handleClickDeleteCourse2() { //the api for deletion does not work, I do not know why
+  function handleClickDeleteCourse() { 
     deleteThisCourse(course.id)
       .then(() => {
         history.push("/courses");
@@ -44,7 +40,7 @@ export const Card = ({ course, authors }) => {
         </p>
         <p>  -------------------</p>
         <Button className='inputSearch' handleClick={handleClickToggleShowMode} name={"View course"} />
-        <Button className='inputSearch' handleClick={handleClickDeleteCourse2} name={"Delete course"} />
+        <Button className='inputSearch' handleClick={handleClickDeleteCourse} name={"Delete course"} />
       </div>
     </>
   );
