@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
 import { InputField } from './InputField';
+import PropTypes from "prop-types";
 
-export const SearchCourse = (props) => {
+export const SearchCourse = ({ searchHandler }) => {
 
     const [inputValue, setValue] = useState("");
 
-    const mapper = {};
-    props.courseList.forEach(element => {
-        mapper[element.title] = element;
-    });
-
-    const searchList = (searchValue) => {
-        props.setCourseList([mapper[searchValue]]);
-        { props.setSearchList(props.courseList) }
-    }
-
     function handleClickFunction() {
-        inputValue && searchList(inputValue)
+        searchHandler(inputValue);
     }
 
     const handleChange = (e) => {
@@ -29,7 +20,7 @@ export const SearchCourse = (props) => {
             <div class="Div-inline">
                 <InputField
                     type="text"
-                    value={inputValue && inputValue}
+                    value={inputValue}
                     label="Search"
                     onChange={handleChange}
                 />
@@ -39,6 +30,9 @@ export const SearchCourse = (props) => {
                 <Button className='inputSearch' handleClick={handleClickFunction} name={"Search"} /></div>
             <div class="emptySpace"></div>
         </div>
-
     );
 }
+
+SearchCourse.propTypes = {
+    searchHandler: PropTypes.func.isRequired,
+};

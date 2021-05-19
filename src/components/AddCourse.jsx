@@ -4,9 +4,15 @@ import { InputField } from "./InputField"
 import { Button } from './Button';
 import { toHoursAndMinutes } from './utils/toHoursAndMinutes';
 import { formatDuration } from './helpers/formatDuration';
-import { getAll as getAllAuthors } from "../app_backend_api/authorController";
-import { addAuthor } from "../app_backend_api/authorController";
-import { addCourse } from "../app_backend_api/courseController";
+import { v4 as uuidv4 } from 'uuid';
+import { addAuthor as addNewAuthor } from "../app_backend_api/authorApi";
+import { addCourse as addNewCourse } from "../app_backend_api/courseApi";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addCourse } from "../store/courses/actionCreators";
+import { getAuthors as getAllAuthors } from "../store/authors/selectors";
+import { addAuthor } from "../store/authors/actionCreators";
+
 
 export const AddCourse = () => {
   const history = useHistory();
@@ -15,13 +21,9 @@ export const AddCourse = () => {
   const [duration, setDuration] = useState("");
   const [authorName, setAuthorName] = useState("");
   const [courseAuthors, setCourseAuthors] = useState([]);
-  const [authors, setAuthors] = useState([]);
 
-  useEffect(() => {
-    getAllAuthors().then((resp) => {
-      setAuthors(resp.data.result);
-    });
-  }, []);
+  const dispatch = useDispatch();
+  const authors = useSelector(getAllAuthors);
 
   const submitHandler = () => {
     const newCourse = {
@@ -31,9 +33,10 @@ export const AddCourse = () => {
       authors: courseAuthors.map((author) => author.id),
     };
 
-    addCourse(newCourse)
+    addNewCourse(newCourse)
       .then((resp) => {
         history.push("/courses");
+        dispatch(addCourse(resp.data.result));
       })
       .catch((err) => console.log(err.toJSON()));
   };
@@ -53,67 +56,53 @@ export const AddCourse = () => {
     setCourseAuthors([...filteredCourseAuthors]);
   };
 
-  const handleTitleChange = (e) => {
-    setTitle(e)
-  };
-
-  const handleDurationChange = (e) => {
-    setDuration(e)
-  };
-
-  const handleNewAuthorNameChange = (e) => {
-    setAuthorName(e)
-  };
-
-  const addNewAuthor = () => {
+  const addAuthorToList = () => {
     if (!authorName) {
       return;
     }
 
     const newAuthor = {
+      id: uuidv4(),
       name: authorName
     };
 
-    addAuthor(newAuthor)
+    addNewAuthor(newAuthor)
       .then((resp) => {
-        setAuthors([...authors, newAuthor]);
-      })
-      .catch((err) => console.log(err.toJSON()));
+        dispatch(addAuthor(resp.data.result));
+        setAuthorName("");
+      });
 
-    setAuthorName("");
   };
 
-  const autorListView = authors && authors.map((d) =>
+  const autorListView = authors.map((autor) =>
     <div>
       <div class="Div-inline">
-        <h6> {d.name}</h6>
+        <h6> {autor.name}</h6>
       </div>
       <div class="emptySpaceLittle"></div>
       <div class="Div-inline">
         <Button
           className='inputSearch'
           name=" Add to course"
-          handleClick={() => addAuthorToCourse(d)}
+          handleClick={() => addAuthorToCourse(autor)}
         />
-
       </div>
     </div>
   );
 
-  const courseAutorListView = courseAuthors && courseAuthors.map((d) =>
+  const courseAutorListView = courseAuthors && courseAuthors.map((autor) =>
 
     <div>
       <div class="Div-inline">
-        <h6> {d.name}</h6>
+        <h6> {autor.name}</h6>
       </div>
       <div class="emptySpaceLittle"></div>
       <div class="Div-inline">
         <Button
           className='inputSearch'
           name="Delete"
-          handleClick={() => deleteCourseAuthor(d.id)}
+          handleClick={() => deleteCourseAuthor(autor.id)}
         />
-
       </div>
     </div>
   );
@@ -124,24 +113,24 @@ export const AddCourse = () => {
         <div>
           <InputField
             type="text"
-            onChange={handleNewAuthorNameChange}
-            value={authorName && authorName}
+            onChange={setAuthorName}
+            value={authorName}
           />
-          <Button className='inputSearch' name="Create author" handleClick={addNewAuthor} />
+          <Button className='inputSearch' name="Create author" handleClick={addAuthorToList} />
         </div>
         <div>
           <div class="Div-inline">{<h6 >Title </h6>}</div>
           <div class="emptySpaceLittle"></div>
           <InputField
             type="text"
-            value={title && title}
-            onChange={handleTitleChange}
+            value={title}
+            onChange={setTitle}
           />
 
           <div class="emptySpace"></div>
         </div>
         <div>
-          <div class="Div-inline">{<h6 >Description</h6>}</div>
+          <div class="Div-inline"><h6 >Description</h6></div>
           <div class="emptySpaceLittle"></div>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           <div class="emptySpace"></div>
@@ -157,8 +146,8 @@ export const AddCourse = () => {
           <div class="Div-inline">{<h6> Duration </h6>}</div>
           <InputField
             type="text"
-            value={duration && duration}
-            onChange={handleDurationChange}
+            value={duration}
+            onChange={setDuration}
           />
           <div class="emptySpaceLittle"></div>
           <div class="Div-inline"> {formatDuration(toHoursAndMinutes(duration))}</div>

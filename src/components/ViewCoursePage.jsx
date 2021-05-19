@@ -1,11 +1,10 @@
 import './Styles.css';
-import React, { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getCourse } from "../../src/app_backend_api/courseController";
-import { getAll as getAllAuthors } from "../app_backend_api/authorController";
+import { useEffect, useState, React, useMemo } from "react";
+import { getCourse } from "../app_backend_api/courseApi";
+import { getAll as getAllAuthors } from "../app_backend_api/authorApi";
 
-export const ViewCourse = () => {
+export const ViewCoursePage = () => {
 
     const [authorList, setAuthors] = useState([]);
 
