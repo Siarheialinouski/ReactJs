@@ -35,7 +35,7 @@ export const RegistrationPage = () => {
             <div >
                 Registration page
                 <div>
-                    <div class="Div-inline">{<h6 >Name</h6>}</div>
+                    <div className ="Div-inline">{<h6 >Name</h6>}</div>
                     <InputField
                         type="text"
                         onChange={handleNameChange}
@@ -44,7 +44,7 @@ export const RegistrationPage = () => {
                     />
                 </div>
                 <div>
-                    <div class="Div-inline">{<h6 >Email</h6>}</div>
+                    <div className ="Div-inline">{<h6 >Email</h6>}</div>
                     <InputField
                         type="text"
                         onChange={handleEmailChange}
@@ -53,7 +53,7 @@ export const RegistrationPage = () => {
                     />
                 </div>
                 <div>
-                    <div class="Div-inline">{<h6 >Password</h6>}</div>
+                    <div className ="Div-inline">{<h6 >Password</h6>}</div>
                     <InputField
                         type="text"
                         onChange={handlePasswordChange}

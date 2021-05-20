@@ -1,7 +1,7 @@
 import './Styles.css';
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState, React, useMemo } from "react";
-import { getCourse } from "../app_backend_api/courseApi";
+import { getCourse } from "../store/courses/thunk";
 import { getAll as getAllAuthors } from "../app_backend_api/authorApi";
 
 export const ViewCoursePage = () => {
