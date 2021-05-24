@@ -87,11 +87,11 @@ export const EditCourse = () => {
 
   const autorListView = allAuthors.map((autor) =>
     <div>
-      <div class="Div-inline">
+      <div className="Div-inline">
         <h6> {autor.name}</h6>
       </div>
       <div class="emptySpaceLittle"></div>
-      <div class="Div-inline">
+      <div className="Div-inline">
         <Button
           className='inputSearch'
           name=" Add to course"
@@ -104,11 +104,11 @@ export const EditCourse = () => {
   const courseAutorListView = courseAuthors && courseAuthors.map((autor) =>
 
     <div>
-      <div class="Div-inline">
+      <div className="Div-inline">
         <h6> {autor.name}</h6>
       </div>
       <div class="emptySpaceLittle"></div>
-      <div class="Div-inline">
+      <div className="Div-inline">
         <Button
           className='inputSearch'
           name="Delete"
@@ -130,7 +130,7 @@ export const EditCourse = () => {
           <Button className='inputSearch' name="Create author" handleClick={addAuthorToList} />
         </div>
         <div>
-          <div class="Div-inline">{<h6 >Title </h6>}</div>
+          <div className="Div-inline">{<h6 >Title </h6>}</div>
           <div class="emptySpaceLittle"></div>
           <InputField
             type="text"
@@ -141,27 +141,29 @@ export const EditCourse = () => {
           <div class="emptySpace"></div>
         </div>
         <div>
-          <div class="Div-inline"><h6 >Description</h6></div>
+          <div className="Div-inline"><h6 >Description</h6></div>
           <div class="emptySpaceLittle"></div>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           <div class="emptySpace"></div>
         </div>
         <div>
-          <div class="emptySpace"></div>
+          <div  class="emptySpace"></div>
           {autorListView}
           <div> <p>Course Authors : </p>
+          <div data-testid="authorList">
             {courseAutorListView}
+            </div>
           </div>
         </div>
-        <div class="Div-inline">
-          <div class="Div-inline">{<h6> Duration </h6>}</div>
+        <div className="Div-inline">
+          <div className="Div-inline">{<h6> Duration </h6>}</div>
           <InputField
             type="text"
             value={duration}
             onChange={setDuration}
           />
           <div class="emptySpaceLittle"></div>
-          <div class="Div-inline"> {formatDuration(toHoursAndMinutes(duration))}</div>
+          <div className="Div-inline"> <div>{formatDuration(toHoursAndMinutes(duration))}</div></div>
         </div>
         <div>
           <Button

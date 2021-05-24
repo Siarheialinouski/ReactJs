@@ -24,15 +24,15 @@ export const Login = () => {
   }
 
   return (
-    <div class="Div-inline">
-      <div class="Div-inline">
+    <div className="Div-inline">
+      <div  data-testid="userEmail" className="Div-inline">
         <p>{email}</p>
       </div>
-      <div class="Empty-space2" />
+      <div className="Empty-space2" />
 
-      <div class="Div-inline">
-        {!email ? <Button className='inputSearch' handleClick={handleClickFunction} name={"Login"} /> 
-        : <Button className='inputSearch' handleClick={handleClickLogout} name={"Logout"} />}
+      <div className="Div-inline">
+        {!email ? <Button className='inputSearch' handleClick={handleClickFunction} name="Login" /> 
+        : <Button className='inputSearch' handleClick={handleClickLogout} name="Logout" />}
       </div>
     </div>
   );

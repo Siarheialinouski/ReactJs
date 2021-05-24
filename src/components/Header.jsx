@@ -8,7 +8,7 @@ export const Header = () => {
     <>
       <div className="App-header">
         <Logo />       
-        <div class="emptySpace"></div>
+        <div className="emptySpace"></div>
         <Login />
       </div>
     </>

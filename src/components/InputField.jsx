@@ -22,6 +22,7 @@ export const InputField = ({ value, label, placeholder, type, onChange }) => {
                 className="form-control"
                 placeholder={placeholder}
                 onChange={handleChange}
+                data-testid="input"
             />
         </div>
     );

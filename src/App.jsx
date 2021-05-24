@@ -14,7 +14,7 @@ function App() {
   return (
     <div id="App" className="App">
       <BrowserRouter>
-      <Header />
+        <Header />
         <Switch>
           <PrivateRoute exact path="/"
             render={() => {
@@ -22,7 +22,6 @@ function App() {
               return token ? <Redirect to="/courses" /> : <Redirect to="/login" />;
             }}
           />
-       
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegistrationPage} />
           <PrivateRoute exact path="/courses/add" component={EditCourse} />

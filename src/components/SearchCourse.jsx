@@ -16,8 +16,8 @@ export const SearchCourse = ({ searchHandler }) => {
     };
 
     return (
-        <div class="Div-inline">
-            <div class="Div-inline">
+        <div className="Div-inline">
+            <div className="Div-inline">
                 <InputField
                     type="text"
                     value={inputValue}
@@ -26,7 +26,7 @@ export const SearchCourse = ({ searchHandler }) => {
                 />
             </div>
 
-            <div class="Div-inline">
+            <div className="Div-inline">
                 <Button className='inputSearch' handleClick={handleClickFunction} name={"Search"} /></div>
             <div class="emptySpace"></div>
         </div>

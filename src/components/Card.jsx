@@ -30,15 +30,17 @@ export const Card = ({ course, authors }) => {
         <p>  Description: {course.description}</p>
         <p>  Duration: {course.duration}</p>
         <p>  Created: {course.creationDate}</p>
-        <p>  Authors: {course.authors && course.authors.map((id) =>
-          authors.reduce((acc, author) => {
-            if (author.id === id) {
-              return acc + ` [${author.name}]`;
-            }
-            return acc;
-          }, " ")
-        )}
-        </p>
+        <div data-testid="authorList">
+          <p>  Authors: {course.authors && course.authors.map((id) =>
+            authors.reduce((acc, author) => {
+              if (author.id === id) {
+                return acc + ` [${author.name}]`;
+              }
+              return acc;
+            }, " ")
+          )}
+          </p>
+        </div>
         <Button className='inputSearch' handleClick={handleClickToggleShowMode} name={"View course"} />
         {role === adminRole && <Button className='inputSearch' handleClick={handleClickEditCourse} name={"Edit course"} />}
         {role === adminRole && <Button className='inputSearch' handleClick={handleClickDeleteCourse} name={"Delete course"} />}
