@@ -1,8 +1,8 @@
 import authorsActionTypes from "./actionTypes";
 
-const initialState = [];
+const authorsInitialState = [];
 
-const authorsReducer = (state = initialState, { type, payload }) => {
+const authorsReducer = (state = authorsInitialState, { type, payload }) => {
     switch (type) {
         case authorsActionTypes.ADD_AUTHOR:
             return [...state, payload];

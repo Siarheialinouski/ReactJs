@@ -11,8 +11,8 @@ export const deleteCourse = (id) => ({
     payload: id,
 });
 
-export const getCoursesSuccess = (courses) => ({
-    type: coursesTypes.GET_COURSES_SUCCESS,
+export const setCoursesSuccess = (courses) => ({
+    type: coursesTypes.SET_COURSES_SUCCESS,
     payload: courses,
 });
 

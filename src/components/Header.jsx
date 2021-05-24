@@ -1,7 +1,6 @@
 import { Logo } from './Logo';
 import { Login } from './Login';
 import './Styles.css';
-import { Link, BrowserRouter } from 'react-router-dom'
 import React from 'react';
 
 export const Header = () => {
@@ -9,7 +8,6 @@ export const Header = () => {
     <>
       <div className="App-header">
         <Logo />       
-          <Link to='/courses'>Courses</Link>
         <div class="emptySpace"></div>
         <Login />
       </div>

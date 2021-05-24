@@ -14,7 +14,7 @@ const coursesReducer = (state = coursesInitialState, { type, payload }) => {
                 ...state, 
                 courses: [...state.courses.filter((course) => course.id !== payload)]
             };
-        case coursesTypes.GET_COURSES_SUCCESS:
+        case coursesTypes.SET_COURSES_SUCCESS:
             return {
                 ...state, 
                 courses: payload

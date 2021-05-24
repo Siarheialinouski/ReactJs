@@ -1,25 +1,26 @@
 import './Styles.css';
 import { Button } from './Button';
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from "react-redux";
-import { deleteCourse } from "../store/courses/actionCreators";
-import { deleteCourse as deleteThisCourse } from "../app_backend_api/courseApi";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCourse } from "../store/courses/thunk";
+import { userRole } from "../store/user/selectors";
 
 export const Card = ({ course, authors }) => {
-
+  const adminRole = "admin";
   const history = useHistory();
   const dispatch = useDispatch();
+  const role = useSelector(userRole);
 
   function handleClickToggleShowMode() {
     history.push(`/courses/${course.id}`)
   }
 
-  function handleClickDeleteCourse() { 
-    deleteThisCourse(course.id)
-      .then(() => {
-        history.push("/courses");
-        dispatch(deleteCourse(course.id))
-      });
+  function handleClickDeleteCourse() {
+    dispatch(deleteCourse(course.id));
+  }
+
+  function handleClickEditCourse() {
+    history.push(`/courses/update/${course.id}`)
   }
 
   return (
@@ -38,9 +39,9 @@ export const Card = ({ course, authors }) => {
           }, " ")
         )}
         </p>
-        <p>  -------------------</p>
         <Button className='inputSearch' handleClick={handleClickToggleShowMode} name={"View course"} />
-        <Button className='inputSearch' handleClick={handleClickDeleteCourse} name={"Delete course"} />
+        {role === adminRole && <Button className='inputSearch' handleClick={handleClickEditCourse} name={"Edit course"} />}
+        {role === adminRole && <Button className='inputSearch' handleClick={handleClickDeleteCourse} name={"Delete course"} />}
       </div>
     </>
   );

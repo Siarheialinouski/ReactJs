@@ -6,16 +6,17 @@ import React from "react";
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
 import { LoginPage } from './components/LoginPage';
 import { RegistrationPage } from './components/RegistrationPage';
-import { AddCourse } from './components/AddCourse'
+import { EditCourse } from './components/EditCourse'
+import { PrivateRoute } from "./components/PrivateRoute";
+import { NotFound } from "./components/NotFound"
 
 function App() {
   return (
     <div id="App" className="App">
-     
       <BrowserRouter>
       <Header />
         <Switch>
-          <Route exact path="/"
+          <PrivateRoute exact path="/"
             render={() => {
               const token = localStorage.getItem("Bearer");
               return token ? <Redirect to="/courses" /> : <Redirect to="/login" />;
@@ -24,9 +25,11 @@ function App() {
        
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegistrationPage} />
-          <Route exact path="/courses/add" component={AddCourse} />
+          <PrivateRoute exact path="/courses/add" component={EditCourse} />
+          <PrivateRoute exact path="/courses/update/:id" component={EditCourse} />
           <Route exact path="/courses/:id" component={ViewCoursePage} />
-          <Route path={['/', '/courses']} component={CoursesPage} />
+          <Route path={'/courses'} component={CoursesPage} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>

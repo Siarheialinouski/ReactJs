@@ -4,12 +4,12 @@ import './Styles.css';
 import { Button } from './Button';
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userName } from "../store/user/selectors";
+import { userEmail } from "../store/user/selectors";
 import { logoutSuccess } from "../store/user/actionCreators";
 
 export const Login = () => {
   const history = useHistory();
-  const name = useSelector(userName);
+  const email = useSelector(userEmail);
   const dispatch = useDispatch();
 
   function handleClickLogout() {
@@ -26,12 +26,12 @@ export const Login = () => {
   return (
     <div class="Div-inline">
       <div class="Div-inline">
-        <p>{name}</p>
+        <p>{email}</p>
       </div>
       <div class="Empty-space2" />
 
       <div class="Div-inline">
-        {!name ? <Button className='inputSearch' handleClick={handleClickFunction} name={"Login"} /> 
+        {!email ? <Button className='inputSearch' handleClick={handleClickFunction} name={"Login"} /> 
         : <Button className='inputSearch' handleClick={handleClickLogout} name={"Logout"} />}
       </div>
     </div>

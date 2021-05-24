@@ -1,20 +1,16 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { InputField } from "./InputField"
 import { Button } from './Button';
 import { toHoursAndMinutes } from './utils/toHoursAndMinutes';
 import { formatDuration } from './helpers/formatDuration';
 import { v4 as uuidv4 } from 'uuid';
-import { addAuthor as addNewAuthor } from "../app_backend_api/authorApi";
-import { addCourse as addNewCourse } from "../app_backend_api/courseApi";
-
 import { useDispatch, useSelector } from "react-redux";
-import { addCourse } from "../store/courses/actionCreators";
+import { getCourse, createCourse, updateCourse } from "../store/courses/thunk";
 import { getAuthors as getAllAuthors } from "../store/authors/selectors";
 import { addAuthor } from "../store/authors/actionCreators";
 
-
-export const AddCourse = () => {
+export const EditCourse = () => {
   const history = useHistory();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -23,29 +19,34 @@ export const AddCourse = () => {
   const [courseAuthors, setCourseAuthors] = useState([]);
 
   const dispatch = useDispatch();
-  const authors = useSelector(getAllAuthors);
 
-  const submitHandler = () => {
-    const newCourse = {
-      title,
-      description,
-      duration: Number(duration),
-      authors: courseAuthors.map((author) => author.id),
-    };
+  const allAuthors = useSelector(getAllAuthors);
+  const params = useParams();
+  const { id } = params;
 
-    addNewCourse(newCourse)
-      .then((resp) => {
-        history.push("/courses");
-        dispatch(addCourse(resp.data.result));
-      })
-      .catch((err) => console.log(err.toJSON()));
-  };
+  useEffect(() => {
+    if (id) {
+      getCourse(id)
+        .then((resp) => {
+          const { authors, description, title, duration } = resp.data.result;
+          setTitle(title);
+          setDescription(description);
+          setDuration(duration);
+
+          setCourseAuthors(
+            authors.map((authorId) =>
+              allAuthors.find((author) => author.id === authorId)
+            )
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [allAuthors, id]);
 
   const addAuthorToCourse = (author) => {
     const isAuthorExist = courseAuthors.some((el) => el.name === author.name);
     if (isAuthorExist) return;
     setCourseAuthors([...courseAuthors, author]);
-
   };
 
   const deleteCourseAuthor = (id) => {
@@ -66,15 +67,25 @@ export const AddCourse = () => {
       name: authorName
     };
 
-    addNewAuthor(newAuthor)
-      .then((resp) => {
-        dispatch(addAuthor(resp.data.result));
-        setAuthorName("");
-      });
+    dispatch(addAuthor(newAuthor));
+    setAuthorName("");
 
   };
 
-  const autorListView = authors.map((autor) =>
+  const submitHandler = () => {
+    const createOrUpdateCourse = {
+      title,
+      description,
+      duration: Number(duration),
+      authors: courseAuthors.map((author) => author.id),
+    };
+
+    dispatch(id ? updateCourse({ id, ...createOrUpdateCourse }) : createCourse(createOrUpdateCourse));
+    history.push("/courses");
+  };
+
+
+  const autorListView = allAuthors.map((autor) =>
     <div>
       <div class="Div-inline">
         <h6> {autor.name}</h6>
@@ -155,7 +166,7 @@ export const AddCourse = () => {
         <div>
           <Button
             className='inputSearch'
-            name="Create course"
+            name={id ? "Update course" : "Create course"}
             handleClick={() =>
               submitHandler({
                 title,
