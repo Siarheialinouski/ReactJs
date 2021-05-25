@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const InputField = ({ value, label, placeholder, type, onChange }) => {
+export const InputField = ({ value, label,  type, onChange }) => {
     const handleChange = (e) => {
         const { value } = e.target;
         onChange(value);
@@ -9,8 +9,7 @@ export const InputField = ({ value, label, placeholder, type, onChange }) => {
 
     InputField.propTypes = {
         value: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,       
-        placeholder: PropTypes.string.isRequired,
+        onChange: PropTypes.func.isRequired
       };
 
     return (
@@ -20,7 +19,6 @@ export const InputField = ({ value, label, placeholder, type, onChange }) => {
                 type={type}
                 value={value}
                 className="form-control"
-                placeholder={placeholder}
                 onChange={handleChange}
                 data-testid="input"
             />

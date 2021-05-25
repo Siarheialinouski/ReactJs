@@ -59,11 +59,11 @@ describe("Card tests", () => {
       </Provider>
     );
 
-    expect(screen.getByText(course.title)).toBeInTheDocument();
-    expect(screen.getByText(course.description)).toBeInTheDocument();
-    expect(screen.getByText(`${course.duration} minutes`)).toBeInTheDocument();
-    expect(screen.getByText("author6,")).toBeInTheDocument();
-    expect(screen.getByText(course.creationDate)).toBeInTheDocument();
+    expect(screen.getByText(`Tittle: ${course.title}`)).toBeInTheDocument();
+    expect(screen.getByText(`Description: ${course.description}`)).toBeInTheDocument();
+    expect(screen.getByText(`Created: ${course.creationDate}`)).toBeInTheDocument();
+    expect(screen.getByText(`Duration: ${course.duration}`)).toBeInTheDocument();
+    expect(screen.getByText("Authors: [author6]")).toBeInTheDocument();
   });
 });
 

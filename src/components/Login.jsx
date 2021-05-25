@@ -25,7 +25,7 @@ export const Login = () => {
 
   return (
     <div className="Div-inline">
-      <div  data-testid="userEmail" className="Div-inline">
+      <div className="Div-inline">
         <p>{email}</p>
       </div>
       <div className="Empty-space2" />

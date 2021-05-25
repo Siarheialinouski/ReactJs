@@ -30,6 +30,7 @@ export const AddAuthor = (props) => {
     <div className="Div-inline">
       <div className="Div-inline"></div>
       <InputField
+        data-testid="addAuthor"
         type="text"
         value={props.autors && props.autors}
         label="Autor"

@@ -10,7 +10,7 @@ import { EditCourse } from './components/EditCourse'
 import { PrivateRoute } from "./components/PrivateRoute";
 import { NotFound } from "./components/NotFound"
 
-function App() {
+export function App() {
   return (
     <div id="App" className="App">
       <BrowserRouter>
@@ -35,5 +35,3 @@ function App() {
   );
 }
 
-
-export default App;

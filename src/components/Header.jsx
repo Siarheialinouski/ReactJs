@@ -7,7 +7,9 @@ export const Header = () => {
   return (
     <>
       <div className="App-header">
-        <Logo />       
+        <div data-testid="logo">
+          <Logo />
+        </div>
         <div className="emptySpace"></div>
         <Login />
       </div>

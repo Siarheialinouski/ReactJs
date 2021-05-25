@@ -53,12 +53,12 @@ export const CoursesList = () => {
       return [];
     }
     return courses.map((course) => (
-      <Card data-testid="courseList" course={course} authors={authors} />
+      <Card course={course} authors={authors} />
     ))
   }
 
   return (
-    <div >
+    <div data-testid="courseList" >
       {showCourse(courses)}
     </div>
   );

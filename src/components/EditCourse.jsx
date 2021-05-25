@@ -32,7 +32,6 @@ export const EditCourse = () => {
           setTitle(title);
           setDescription(description);
           setDuration(duration);
-
           setCourseAuthors(
             authors.map((authorId) =>
               allAuthors.find((author) => author.id === authorId)
@@ -69,7 +68,6 @@ export const EditCourse = () => {
 
     dispatch(addAuthor(newAuthor));
     setAuthorName("");
-
   };
 
   const submitHandler = () => {
@@ -84,13 +82,12 @@ export const EditCourse = () => {
     history.push("/courses");
   };
 
-
   const autorListView = allAuthors.map((autor) =>
     <div>
       <div className="Div-inline">
         <h6> {autor.name}</h6>
       </div>
-      <div class="emptySpaceLittle"></div>
+      <div className="emptySpaceLittle"></div>
       <div className="Div-inline">
         <Button
           className='inputSearch'
@@ -102,12 +99,11 @@ export const EditCourse = () => {
   );
 
   const courseAutorListView = courseAuthors && courseAuthors.map((autor) =>
-
     <div>
       <div className="Div-inline">
         <h6> {autor.name}</h6>
       </div>
-      <div class="emptySpaceLittle"></div>
+      <div className="emptySpaceLittle"></div>
       <div className="Div-inline">
         <Button
           className='inputSearch'
@@ -122,37 +118,37 @@ export const EditCourse = () => {
     <>
       <div>
         <div>
-          <InputField
-            type="text"
-            onChange={setAuthorName}
-            value={authorName}
-          />
+          <div data-testid="inputCreateAuthor">
+            <InputField
+              type="text"
+              onChange={setAuthorName}
+              value={authorName}
+            />
+          </div>
           <Button className='inputSearch' name="Create author" handleClick={addAuthorToList} />
         </div>
         <div>
           <div className="Div-inline">{<h6 >Title </h6>}</div>
-          <div class="emptySpaceLittle"></div>
+          <div className="emptySpaceLittle"></div>
           <InputField
             type="text"
             value={title}
             onChange={setTitle}
           />
 
-          <div class="emptySpace"></div>
+          <div className="emptySpace"></div>
         </div>
         <div>
           <div className="Div-inline"><h6 >Description</h6></div>
-          <div class="emptySpaceLittle"></div>
+          <div className="emptySpaceLittle"></div>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-          <div class="emptySpace"></div>
+          <div className="emptySpace"></div>
         </div>
-        <div>
-          <div  class="emptySpace"></div>
-          {autorListView}
-          <div> <p>Course Authors : </p>
+        <div className="emptySpace"></div>
+        {autorListView}
+        <div> <p>Course Authors : </p>
           <div data-testid="authorList">
             {courseAutorListView}
-            </div>
           </div>
         </div>
         <div className="Div-inline">
@@ -162,7 +158,7 @@ export const EditCourse = () => {
             value={duration}
             onChange={setDuration}
           />
-          <div class="emptySpaceLittle"></div>
+          <div className="emptySpaceLittle"></div>
           <div className="Div-inline"> <div>{formatDuration(toHoursAndMinutes(duration))}</div></div>
         </div>
         <div>
@@ -179,7 +175,7 @@ export const EditCourse = () => {
             }
           />
         </div>
-        <div class="emptySpace"></div>
+        <div className="emptySpace"></div>
       </div>
     </>
   )

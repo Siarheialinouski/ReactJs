@@ -28,7 +28,7 @@ export const SearchCourse = ({ searchHandler }) => {
 
             <div className="Div-inline">
                 <Button className='inputSearch' handleClick={handleClickFunction} name={"Search"} /></div>
-            <div class="emptySpace"></div>
+            <div className="emptySpace"></div>
         </div>
     );
 }

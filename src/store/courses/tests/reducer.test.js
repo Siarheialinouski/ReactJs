@@ -1,5 +1,5 @@
-import reducer from "../reducer";
 import types from "../actionTypes";
+import reducer from "../reducer";
 
 describe("Courses reducer", () => {
     test("should return the initial state", () => {
