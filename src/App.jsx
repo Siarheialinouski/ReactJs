@@ -10,11 +10,11 @@ import { EditCourse } from './components/EditCourse'
 import { PrivateRoute } from "./components/PrivateRoute";
 import { NotFound } from "./components/NotFound"
 
-function App() {
+export function App() {
   return (
     <div id="App" className="App">
       <BrowserRouter>
-      <Header />
+        <Header />
         <Switch>
           <PrivateRoute exact path="/"
             render={() => {
@@ -22,7 +22,6 @@ function App() {
               return token ? <Redirect to="/courses" /> : <Redirect to="/login" />;
             }}
           />
-       
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegistrationPage} />
           <PrivateRoute exact path="/courses/add" component={EditCourse} />
@@ -36,5 +35,3 @@ function App() {
   );
 }
 
-
-export default App;

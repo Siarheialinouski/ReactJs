@@ -27,15 +27,16 @@ export const AddAuthor = (props) => {
   };
 
   return (
-    <div class="Div-inline">
-      <div class="Div-inline"></div>
+    <div className="Div-inline">
+      <div className="Div-inline"></div>
       <InputField
+        data-testid="addAuthor"
         type="text"
         value={props.autors && props.autors}
         label="Autor"
         onChange={handleChange}
       />
-      <div class="Div-inline">
+      <div className="Div-inline">
         <Button className='inputSearch' handleClick={handleClickFunction} name={"Create Author"} />
       </div>
     </div>

@@ -1,4 +1,6 @@
 export const formatDuration = ([hours, minutes]) => {
 
-    return <div> {(hours > 0) ? <div>{hours}h {minutes}min </div> : <div> {minutes}min </div>}</div>
+    return `${hours < 10 ? `0${hours}` : hours}:${
+        minutes < 10 ? `0${minutes}` : minutes
+      }`;
 };

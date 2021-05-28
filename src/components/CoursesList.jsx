@@ -49,14 +49,17 @@ export const CoursesList = () => {
   }, [dispatch]);
 
   const showCourse = (courses) => {
+    if(!courses){
+      return [];
+    }
     return courses.map((course) => (
       <Card course={course} authors={authors} />
     ))
   }
 
   return (
-    <div>
-      {courses.length ? showCourse(courses) : <p>No data. Feel free to add a new course</p>}
+    <div data-testid="courseList" >
+      {showCourse(courses)}
     </div>
   );
 }
